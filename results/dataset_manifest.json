@@ -1,0 +1,22 @@
+{
+    "source_dir": "C:\\Users\\K P SHOHIL\\.gemini\\antigravity-ide\\scratch\\Deep Learning\\data\\raw",
+    "total_scanned": 1984,
+    "unique_valid": 1984,
+    "corrupted_count": 0,
+    "duplicate_count": 0,
+    "splits": {
+        "train": {
+            "Normal": 694,
+            "Pothole": 694
+        },
+        "validation": {
+            "Normal": 149,
+            "Pothole": 149
+        },
+        "test": {
+            "Normal": 149,
+            "Pothole": 149
+        }
+    },
+    "seed": 42
+}

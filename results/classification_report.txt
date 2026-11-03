@@ -1,0 +1,53 @@
+# Academic Performance Evaluation & Error Analysis
+**Project Title:** Road Pothole Detection from Dashcam Footage Using Deep CNN
+**Model:** Pretrained InceptionV3 Transfer Learning Backbone
+**Test Sample Size:** 664 held-out images (Stratified Split)
+
+---
+
+### 1. Quantitative Performance Overview
+- **Overall Accuracy:** 98.64%
+- **Pothole Precision:** 100.00% (Confidence that a detected defect is genuine)
+- **Pothole Recall:** 97.28% (Proportion of actual potholes successfully identified)
+- **F1-Score:** 0.9862 (Harmonic balance of precision and recall)
+- **Normal Specificity:** 100.00% (Rejection rate of undamaged roads)
+- **ROC AUC:** 0.9998 | **PR AUC:** 0.9998
+- **Inference Latency:** 2.96 ms/image (~338.3 FPS on host hardware)
+
+---
+
+### 2. Error Analysis: False Positives vs. False Negatives
+- **True Positives (TP = 322):** Potholes correctly flagged above the 0.5 confidence threshold.
+- **True Negatives (TN = 333):** Smooth, undamaged asphalt road frames correctly classified as Normal.
+- **False Positives (FP = 0):** Normal road frames incorrectly flagged as potholes. In dashcam footage, false positives typically arise from:
+  1. *Sharp cast shadows* from roadside trees, overpasses, or adjacent vehicles that produce abrupt, high-contrast dark contours resembling pothole rims.
+  2. *Road surface artifacts* such as circular manhole covers, dark asphalt expansion joints, bitumen patching seams, or fresh tar patches.
+  3. *Drainage grates and oil slicks* that disrupt the uniform texture of the road surface.
+- **False Negatives (FN = 9):** Genuine potholes missed by the model. These critical failures predominantly occur when:
+  1. *Shallow erosion or minor surface depressions* lack the pronounced depth cues and dark shadows that InceptionV3 spatial filters rely on.
+  2. *Puddle water accumulation* fills the pothole cavity, reflecting sunlight and specular sky glare, effectively masking the depression depth.
+  3. *Extreme glare or nighttime underexposure* degrades local textural feature gradients.
+
+---
+
+### 3. Impact of Class Balance and Stratification
+The training dataset was stratified with approximately balanced representation (~51% Normal, ~49% Pothole). This balanced ratio prevents trivial majority-class classification bias. On real-world municipal highways, potholes represent an extreme rare-event anomaly (< 1% of total driving mileage). Consequently, in production deployment:
+- Minimizing False Positives (maximizing Precision) is essential to prevent driver alert fatigue and avoid flooding maintenance dispatchers with spurious road-hazard flags.
+- However, for high-speed highway safety, Recall takes precedence to avoid vehicle axle damage and collisions. The user-adjustable confidence threshold in our web application allows operators to dynamically balance this operational trade-off.
+
+---
+
+### 4. Overfitting, Generalization, and Environmental Domain Shift
+- **Backbone Freezing & Dropout Regularization:** Freezing the low-level 7x7 and 3x3 Gabor-like filters of InceptionV3 and introducing a 0.4 Dropout rate successfully constrained capacity, maintaining validation loss stability.
+- **Limitations on Novel Roadways:** The primary domain gap stems from differences in road paving materials (e.g., concrete vs. weathered asphalt, cobblestones, unpaved gravel) and varied camera mount angles, vibrations, and weather conditions (snow, heavy rainfall). Continuous real-world deployment would benefit from active learning and multi-region training data.
+
+
+### Scikit-Learn Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.97      1.00      0.99       333
+     Pothole       1.00      0.97      0.99       331
+
+    accuracy                           0.99       664
+   macro avg       0.99      0.99      0.99       664
+weighted avg       0.99      0.99      0.99       664

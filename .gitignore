@@ -1,0 +1,60 @@
+# User Requested: Totally ignore Resources directory
+Resources/
+resources/
+[Rr]esources/
+
+# Python environment & cache
+.venv/
+env/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# Node / Next.js
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+frontend/out/
+frontend/build/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Large dataset files & raw downloads
+dataset/
+data/
+raw_data/
+*.zip
+*.tar.gz
+*.rar
+
+# Model checkpoints & large weights (>50MB)
+models/*.keras
+models/*.h5
+models/*.onnx
+models/*.weights.h5
+!models/.gitkeep
+
+# Output media & large videos
+outputs/*.mp4
+outputs/*.avi
+outputs/*.mov
+outputs/uploads/
+outputs/processed/
+outputs/sample_videos/*
+!outputs/sample_videos/.gitkeep
+
+# Temporary files & cache
+.pytest_cache/
+.coverage
+htmlcov/
+*.log

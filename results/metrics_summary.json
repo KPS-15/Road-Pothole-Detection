@@ -1,0 +1,51 @@
+{
+    "evaluation_summary": {
+        "total_test_samples": 664,
+        "positive_class": "Pothole",
+        "negative_class": "Normal",
+        "classification_threshold": 0.5
+    },
+    "overall_metrics": {
+        "accuracy": 0.9864,
+        "precision_pothole": 1.0,
+        "recall_pothole": 0.9728,
+        "f1_score_pothole": 0.9862,
+        "specificity_normal": 1.0,
+        "roc_auc": 0.9998,
+        "pr_auc": 0.9998
+    },
+    "confusion_matrix": {
+        "true_negatives_normal": 333,
+        "false_positives_false_alert": 0,
+        "false_negatives_missed_pothole": 9,
+        "true_positives_detected_pothole": 322
+    },
+    "per_class_metrics": {
+        "Normal": {
+            "precision": 0.9736842105263158,
+            "recall": 1.0,
+            "f1-score": 0.9866666666666667,
+            "support": 333.0
+        },
+        "Pothole": {
+            "precision": 1.0,
+            "recall": 0.972809667673716,
+            "f1-score": 0.9862174578866769,
+            "support": 331.0
+        },
+        "accuracy": 0.9864457831325302,
+        "macro avg": {
+            "precision": 0.986842105263158,
+            "recall": 0.9864048338368581,
+            "f1-score": 0.9864420622766719,
+            "support": 664.0
+        },
+        "weighted avg": {
+            "precision": 0.986802473050095,
+            "recall": 0.9864457831325302,
+            "f1-score": 0.9864427387959188,
+            "support": 664.0
+        }
+    },
+    "classification_report_raw": "              precision    recall  f1-score   support\n\n      Normal       0.97      1.00      0.99       333\n     Pothole       1.00      0.97      0.99       331\n\n    accuracy                           0.99       664\n   macro avg       0.99      0.99      0.99       664\nweighted avg       0.99      0.99      0.99       664\n"
+}
